@@ -54,7 +54,7 @@ void setup()
 {
   pinMode(8, OUTPUT);
   pinMode(5, OUTPUT);
-  pinMode(1, OUTPUT);
+  pinMode(2, OUTPUT);
 }
 /*
 Fin funcion setup
@@ -66,17 +66,28 @@ Inicio funcion loop
 */
 void loop()
 {
-  if (0.01723 * readUltrasonicDistance(0, 0) == 30) {
+  int distancia = 0.01723 * readUltrasonicDistance(2, 2);
+
+  if((distancia <= 333) && (distancia >= 200)) {
     digitalWrite(8, HIGH);
-  } else {
-    if (0.01723 * readUltrasonicDistance(0, 0) == 20) {
-      digitalWrite(5, HIGH);
-    } else {
-      if (0.01723 * readUltrasonicDistance(0, 0) == 10) {
-        digitalWrite(1, HIGH);
-      }
-    }
+  } 
+  else {
+    digitalWrite(8, LOW); 
   }
+  if((distancia < 200) && (distancia >= 100)) {
+    digitalWrite(7, HIGH);
+  } 
+  else {
+    digitalWrite(7, LOW); 
+  }
+  if(distancia < 100) {
+    digitalWrite(4, HIGH);
+  } 
+  else {
+    digitalWrite(4, LOW); 
+  }
+   
+
   delay(10); // Delay a little bit to improve simulation performance
 }
 /*
