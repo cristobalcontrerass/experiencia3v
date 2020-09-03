@@ -5,7 +5,6 @@
  
    Este codigo tiene como objetivo dar muestra de un uso practico de:
    Sensor ultrasonico ping (parallax)
-
    Según la hoja de datos de Parallax para el PING))), 
    hay 73,746 microsegundos por pulgada o 29,034 microsegundos por centimetro 
    (es decir, el sonido viaja a 1130 pies (o 34442.4cm) por segundo). 
@@ -14,13 +13,11 @@
    ver: 
    https://www.parallax.com/sites/default/files/downloads/28015-PING-Sensor-Product-Guide-v2.0.pdf
         [En el PDF: TO_IN = 73_746' Inches ; TO_CM = 29_034' Centimeters ]
-
    El circuito:
      * +V conectado a sensor PING))) en +5V
      * GND conectado a sensor PING))) en GND (ground)
      * SIG conectado a sensor PING))) en pin digital 7
      * LED conectado a pin 9 (PWM)
-
    Funcion
    readUltrasonicDistance(int triggerPin, int echoPin): Referencia obtenida de sensor ultrasonico tinkercad.com
 */
@@ -66,13 +63,13 @@ Inicio funcion loop
 */
 void loop()
 {
-  int distancia = 0.01723 * readUltrasonicDistance(2, 2);
+  float distancia = 0.01723 * readUltrasonicDistance(2, 2);
 
   if((distancia <= 333) && (distancia >= 200)) {
-    digitalWrite(8, HIGH);
+    digitalWrite(4, HIGH);
   } 
   else {
-    digitalWrite(8, LOW); 
+    digitalWrite(4, LOW); 
   }
   if((distancia < 200) && (distancia >= 100)) {
     digitalWrite(7, HIGH);
@@ -81,12 +78,13 @@ void loop()
     digitalWrite(7, LOW); 
   }
   if(distancia < 100) {
-    digitalWrite(4, HIGH);
+    digitalWrite(8, HIGH);
   } 
   else {
-    digitalWrite(4, LOW); 
+    digitalWrite(8, LOW); 
   }
-   
+  Serial.print("distancia: ");
+  Serial.println(distancia); 
 
   delay(10); // Delay a little bit to improve simulation performance
 }
